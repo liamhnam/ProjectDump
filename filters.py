@@ -12,6 +12,9 @@ def get_exclude_patterns():
     # Build artifacts
     'dist', 'build', 'target', 'out', 'bin', 'obj', '.eggs', 'lib', 'lib64', 'generated',
 
+    # CMake build
+    'cmake-build-debug', 'cmake-build-debug-visual-studio', 'cmake-build-release-visual-studio',
+
     # Framework build folders
     '.next', '.nuxt', '.angular', 'coverage', '.turbo', '.vercel', '.expo', '.parcel-cache',
 
@@ -25,7 +28,7 @@ def get_exclude_patterns():
     '.github', '.gitlab', '.circleci', '.docker', 'logs', 'log', 'docker', 'containers',
 
     # Database & sessions
-    'db', 'database', 'sqlite', 'sessions', 'flask_session', 'instance',
+    'db', 'database', 'sqlite', 'sessions', 'flask_session', 'instance'
     }
 
     exclude_files = {
