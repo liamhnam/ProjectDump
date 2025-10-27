@@ -36,6 +36,12 @@ def get_exclude_patterns() -> Tuple[Set[str], Set[str]]:
         "lib",
         "lib64",
         "generated",
+
+        # CMake build
+        "cmake-build-debug",
+        "cmake-build-debug-visual-studio",
+        "cmake-build-release-visual-studio",
+        
         # Framework build folders
         ".next",
         ".nuxt",

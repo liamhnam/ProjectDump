@@ -15,19 +15,22 @@ import contextlib
 import subprocess
 import platform
 import json
+from appdirs import user_data_dir
 
-CONFIG_FILE = "last_path.json"
-
+APP_NAME = "ProjectDump"
+CONFIG_FILE = os.path.join(user_data_dir(APP_NAME), "last_path.json")
 
 def save_last_path(path: str):
+    """Lưu đường dẫn gần nhất vào thư mục người dùng (cross-platform)"""
     try:
+        os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
         with open(CONFIG_FILE, "w", encoding="utf-8") as f:
             json.dump({"last_path": path}, f)
     except Exception as e:
         print("Không thể lưu last_path:", e)
 
-
 def load_last_path() -> str | None:
+    """Tải lại đường dẫn gần nhất"""
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -106,8 +109,6 @@ class ProjectDumpGUI:
         try:
             for item in os.listdir(project_path):
                 full_path = os.path.join(project_path, item)
-                # chỉ hiển thị folder, bỏ qua các tên có trong exclude_dirs
-                
                 exclude_dirs, exclude_files = get_exclude_patterns()
                 if os.path.isdir(full_path) and item not in exclude_dirs:
                     var = tk.BooleanVar(value=False)
@@ -128,13 +129,8 @@ class ProjectDumpGUI:
         self.open_btn.config(state="disabled")
         self.output_path = None
 
-        # Lấy exclude từ checkbox (chỉ lấy tên folder chứ không cần full path)
         exclude_list = [os.path.basename(path) for path, var in self.exclude_vars.items() if var.get()]
-
-        # Lấy patterns mặc định từ filters
         exclude_dirs, exclude_files = get_exclude_patterns()
-
-        # Merge thêm exclude_list người dùng chọn
         exclude_dirs = set(exclude_dirs).union(set(exclude_list))
 
         log_buffer = io.StringIO()
@@ -142,7 +138,6 @@ class ProjectDumpGUI:
             code_content = aggregate_code(project_path, text, exclude_dirs, exclude_files)
 
         success = bool(code_content)
-
         self.log_text.insert(tk.END, log_buffer.getvalue() + "\n")
         self.log_text.see(tk.END)
 
