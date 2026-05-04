@@ -1,96 +1,72 @@
-# 🚀 ProjectDump GUI
+# 🚀 ProjectDump
 
-ProjectDump là công cụ gom mã nguồn của một project thành một file duy nhất (`source_dump.txt`).  
-Phiên bản này đã được bổ sung **giao diện người dùng bằng Tkinter** để dễ thao tác hơn.
+**ProjectDump** là công cụ giúp bạn gom toàn bộ mã nguồn của một dự án thành một file duy nhất (`source_dump.txt`) hoặc sao chép thẳng vào Clipboard. Chỉ với 1 thao tác, bạn đã có ngay toàn bộ context (ngữ cảnh) của project để dán vào ChatGPT, Claude, Gemini hoặc bất kỳ AI/LLM nào.
 
----
-
-## ✨ Tính năng
-- Tự động phát hiện công nghệ dự án (Python, Node.js, Java, v.v.)
-- Lọc bỏ thư mục/file rác (node_modules, build, cache…)
-- Tạo **cây thư mục** và trích xuất nội dung code
-- Lưu ra file `source_dump.txt` ngay trong project
-- Giao diện GUI với:
-  - Chọn ngôn ngữ (Tiếng Việt / English)
-  - Chọn thư mục dự án
-  - Hiển thị log chi tiết
-  - Nút mở nhanh thư mục chứa file output
+Tạm biệt việc phải copy-paste từng file một cách thủ công!
 
 ---
 
-## 🖥️ Cách chạy (Python)
+## 🔥 [MỚI] Phiên bản VS Code Extension (Khuyên dùng)
 
-### Yêu cầu
-- Python 3.8+
-- Các thư viện chuẩn (Tkinter, os, sys…) đã có sẵn trong Python
+Chúng tôi đã phát hành tiện ích mở rộng (Extension) chính thức trên VS Code. Đây là cách nhanh nhất và tiện lợi nhất để gom mã nguồn ngay trong lúc code.
 
-### Chạy trực tiếp
+### 📥 Hướng dẫn cài đặt Extension
+
+**Cách 1: Trực tiếp từ VS Code Marketplace**
+1. Mở thanh **Extensions** trong VS Code (`Ctrl + Shift + X` hoặc `Cmd + Shift + X`).
+2. Tìm kiếm **`ProjectDump`** (tác giả: `canhhungit`).
+3. Nhấn **Install**.
+
+**Cách 2: Cài đặt thủ công bằng file `.vsix`**
+1. Tải file `projectdump-x.x.x.vsix` từ dự án.
+2. Mở thanh **Extensions** trong VS Code, nhấn vào dấu **`...`** (góc trên bên phải).
+3. Chọn **Install from VSIX...** và tìm đến file vừa tải về.
+
+### 💡 Hướng dẫn sử dụng Extension
+- **Cách 1 (Nhanh nhất):** Nhìn xuống góc dưới bên phải (thanh Status Bar) của VS Code, bấm vào nút **`{} Dump`**.
+- **Cách 2:** Nhấn `Ctrl + Shift + P` (hoặc `Cmd + Shift + P`), gõ `ProjectDump` và chọn:
+  - `ProjectDump: Generate Source Dump` (Lưu ra file `source_dump.txt`).
+  - `ProjectDump: Dump & Copy to Clipboard` (Copy thẳng vào bộ nhớ tạm để paste vào AI).
+- **Cách 3:** Click chuột phải vào một thư mục bất kỳ ở thanh Explorer bên trái, chọn **`ProjectDump: Dump This Folder`** để chỉ gom code của riêng thư mục đó.
+
+---
+
+## 🖥️ Phiên bản Python GUI (Standalone)
+
+Nếu bạn cần gom dự án ở môi trường ngoài VS Code, bạn có thể sử dụng phiên bản giao diện (GUI) độc lập được viết bằng Python/Tkinter.
+
+### 1. Chạy trực tiếp bằng Python
+Yêu cầu hệ thống: **Python 3.8+**
 ```bash
 python __main__.py
 ```
 
----
-
-## 📦 Build thành file chạy độc lập
-
-### Windows (exe)
-Cài **PyInstaller**:
+### 2. Build thành file chạy độc lập (.exe / .app)
+Cài đặt thư viện PyInstaller:
 ```bash
 pip install pyinstaller
 ```
 
-Build file `.exe`:
-```bash
-pyinstaller --onefile --windowed __main__.py -n ProjectDumpGUI
-```
-
-Kết quả: `dist/ProjectDumpGUI.exe`
-
-Nếu muốn thêm icon:
+**Dành cho Windows (.exe):**
 ```bash
 pyinstaller --onefile --windowed --icon=icon.ico __main__.py -n ProjectDumpGUI
 ```
+*(File kết quả sẽ nằm trong thư mục `dist/ProjectDumpGUI.exe`)*
 
----
-
-### macOS (app)
-Cài **PyInstaller**:
-```bash
-pip install pyinstaller
-```
-
-Build file `.app`:
-```bash
-pyinstaller --onefile --windowed --name ProjectDumpGUI __main__.py
-```
-
-Kết quả: `dist/ProjectDumpGUI.app`
-
-Thêm icon `.icns`:
+**Dành cho macOS (.app):**
 ```bash
 pyinstaller --onefile --windowed --icon=icon.icns __main__.py -n ProjectDumpGUI
 ```
-
-⚠️ **Lưu ý**:
-- App chỉ chạy trên cùng kiến trúc máy build (Intel vs Apple Silicon).
-- Nếu chia sẻ cho người khác, có thể cần **codesign** và **notarize** với Apple Developer ID.
+*(File kết quả sẽ nằm trong thư mục `dist/ProjectDumpGUI.app`)*
 
 ---
 
-## 📂 File output
-Sau khi chạy thành công, file sẽ được tạo tại:
-```
-<project_path>/source_dump.txt
-```
-
----
-
-## 🎯 Demo giao diện
-- Chọn ngôn ngữ (vi/en)
-- Chọn thư mục dự án
-- Bấm **Chạy ProjectDump**
-- Xem log chi tiết trong cửa sổ
-- Bấm **Mở thư mục output** để mở ngay thư mục chứa file kết quả
+## ✨ Các tính năng cốt lõi
+- 🔍 **Nhận diện thông minh:** Tự động phát hiện công nghệ của dự án (Python, Node.js, Java, Go, v.v.).
+- 🚫 **Tự động lọc rác:** Mặc định bỏ qua các thư mục nặng (`node_modules`, `build`, `dist`, `cache`...) và các file nhị phân.
+- 📝 **Tôn trọng `.gitignore`:** Tự động đọc và bỏ qua các file nằm trong `.gitignore`.
+- 📁 **Tạo sơ đồ cây (ASCII Tree):** Sinh ra cây cấu trúc thư mục ở đầu file giúp AI dễ hình dung kiến trúc project.
+- 🌐 **Hỗ trợ đa ngôn ngữ:** Giao diện hỗ trợ cả Tiếng Việt và Tiếng Anh.
 
 ---
 
