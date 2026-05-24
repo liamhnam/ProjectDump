@@ -51,6 +51,8 @@ def detect_project_tech(project_path: str) -> List[str]:
         "circleci": [".circleci/config.yml"],
         "deno": ["deno.json"],
         "bun": ["bun.lockb"],
+        "c": ["*.c", "*.h"],
+        "cpp": ["*.cpp", "*.hpp"]
     }
 
     detected_techs: Set[str] = set()
@@ -111,6 +113,10 @@ def get_extensions_by_tech(techs: List[str]) -> Set[str]:
         "elixir": [".ex", ".exs"],
         "dart": [".dart"],
         "scala": [".scala", ".sc"],
+
+        # Systems Programming
+        "cpp": [".cpp", ".hpp"],
+        "c": [".c", ".h"],
         # Infrastructure
         "docker": ["Dockerfile", ".dockerignore"],
         "kubernetes": [".yaml", ".yml"],

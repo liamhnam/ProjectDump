@@ -1,110 +1,74 @@
 # 🚀 ProjectDump
 
-**ProjectDump** is a Python CLI tool that detects a project's technologies, filters out non-essential files, and compiles the source code and directory structure into a single readable file.
+**ProjectDump** là công cụ giúp bạn gom toàn bộ mã nguồn của một dự án thành một file duy nhất (`source_dump.txt`) hoặc sao chép thẳng vào Clipboard. Chỉ với 1 thao tác, bạn đã có ngay toàn bộ context (ngữ cảnh) của project để dán vào ChatGPT, Claude, Gemini hoặc bất kỳ AI/LLM nào.
+
+Tạm biệt việc phải copy-paste từng file một cách thủ công!
 
 ---
 
-## 📦 Features
+## 🔥 [MỚI] Phiên bản VS Code Extension (Khuyên dùng)
 
-- 🔍 Auto-detects technologies (Python, JavaScript, Java, etc.)
-- 🧹 Skips dependencies, binaries, media, and config clutter
-- 🌲 Generates a clean directory tree
-- 📄 Dumps readable source code with syntax highlighting
-- ⚡ Handles large projects and ignores huge files (>100MB)
+Chúng tôi đã phát hành tiện ích mở rộng (Extension) chính thức trên VS Code. Đây là cách nhanh nhất và tiện lợi nhất để gom mã nguồn ngay trong lúc code.
+
+### 📥 Hướng dẫn cài đặt Extension
+
+**Cách 1: Trực tiếp từ VS Code Marketplace**
+1. Mở thanh **Extensions** trong VS Code (`Ctrl + Shift + X` hoặc `Cmd + Shift + X`).
+2. Tìm kiếm **`ProjectDump`** (tác giả: `canhhungit`).
+3. Nhấn **Install**.
+
+**Cách 2: Cài đặt thủ công bằng file `.vsix`**
+1. Tải file `projectdump-x.x.x.vsix` từ dự án.
+2. Mở thanh **Extensions** trong VS Code, nhấn vào dấu **`...`** (góc trên bên phải).
+3. Chọn **Install from VSIX...** và tìm đến file vừa tải về.
+
+### 💡 Hướng dẫn sử dụng Extension
+- **Cách 1 (Nhanh nhất):** Nhìn xuống góc dưới bên phải (thanh Status Bar) của VS Code, bấm vào nút **`{} Dump`**.
+- **Cách 2:** Nhấn `Ctrl + Shift + P` (hoặc `Cmd + Shift + P`), gõ `ProjectDump` và chọn:
+  - `ProjectDump: Generate Source Dump` (Lưu ra file `source_dump.txt`).
+  - `ProjectDump: Dump & Copy to Clipboard` (Copy thẳng vào bộ nhớ tạm để paste vào AI).
+- **Cách 3:** Click chuột phải vào một thư mục bất kỳ ở thanh Explorer bên trái, chọn **`ProjectDump: Dump This Folder`** để chỉ gom code của riêng thư mục đó.
 
 ---
 
-## 🧑‍💻 Supported Technologies (Partial List)
+## 🖥️ Phiên bản Python GUI (Standalone)
 
-- **Languages**: Python, JS/TS, Java, Kotlin, PHP, Ruby, Go, Rust, C#, Dart, R, Scala, Elixir
-- **Frameworks**: React, Vue, Svelte, Angular, Next.js, Nuxt, Flutter, Android, iOS
-- **Infra**: Docker, Kubernetes, Terraform, Ansible
-- **CI/CD**: GitHub Actions, GitLab CI, CircleCI
+Nếu bạn cần gom dự án ở môi trường ngoài VS Code, bạn có thể sử dụng phiên bản giao diện (GUI) độc lập được viết bằng Python/Tkinter.
 
----
-
-## 📂 Output Example
-
-```txt
-🚀 PROJECTDUMP
-========================================
-🌐 Select language (en/vi): en
-📂 Enter the project folder path: /path/to/your/project
-🔍 Analyzing project at: /path/to/your/project
-🔍 Scanning directories...
-🛠️  Detected technologies: python
-📁 Extensions included: .py, .pyi, .pyx
-📁 Generating directory tree...
-📄 Processing files...
-  📝 Processing: aggregator.py
-  📝 Processing: constants.py
-  📝 Processing: detector.py
-  📝 Processing: filters.py
-  📝 Processing: one_file_version.py
-  📝 Processing: tree_generator.py
-  📝 Processing: __main__.py
-
-✅ Success! File created: /path/to/your/project/source_dump.txt
-
-📊 Summary:
-   - Files processed: 7
-   - Output size: 30275 characters (~28 KB)
-   - Total lines: 870
-
-🎉 Done! The source_dump.txt file is ready.
-```
-
-Inside `source_dump.txt`demo:
-
-```text
-# ==================================================
-# Path: /path/to/your/project
-# Detected tech: python
-# ==================================================
-
-## DIRECTORY STRUCTURE
-
-New folder/
-├── __pycache__/
-├── __main__.py
-├── aggregator.py
-├── constants.py
-├── detector.py
-├── filters.py
-├── one_file_version.py
-├── source_dump.txt
-└── tree_generator.py
-
-## FILE CONTENTS
-
-### __main__.py
-
-import os
-...
-```
-
-## 🚀 Usage
-
-Run from the command line:
-
+### 1. Chạy trực tiếp bằng Python
+Yêu cầu hệ thống: **Python 3.8+**
 ```bash
-  python main.py /path/to/your/project
+python __main__.py
 ```
 
-## 📁 What It Ignores
+### 2. Build thành file chạy độc lập (.exe / .app)
+Cài đặt thư viện PyInstaller:
+```bash
+pip install pyinstaller
+```
 
-- **Dependency folders**: node_modules, venv, etc.
+**Dành cho Windows (.exe):**
+```bash
+pyinstaller --onefile --windowed --icon=icon.ico __main__.py -n ProjectDumpGUI
+```
+*(File kết quả sẽ nằm trong thư mục `dist/ProjectDumpGUI.exe`)*
 
-- **Media & binaries**: .jpg, .exe, .log, etc.
+**Dành cho macOS (.app):**
+```bash
+pyinstaller --onefile --windowed --icon=icon.icns __main__.py -n ProjectDumpGUI
+```
+*(File kết quả sẽ nằm trong thư mục `dist/ProjectDumpGUI.app`)*
 
-- **Config/IDE**: .git, .vscode, .github, etc.
+---
 
-- **Large files over 100MB**
+## ✨ Các tính năng cốt lõi
+- 🔍 **Nhận diện thông minh:** Tự động phát hiện công nghệ của dự án (Python, Node.js, Java, Go, v.v.).
+- 🚫 **Tự động lọc rác:** Mặc định bỏ qua các thư mục nặng (`node_modules`, `build`, `dist`, `cache`...) và các file nhị phân.
+- 📝 **Tôn trọng `.gitignore`:** Tự động đọc và bỏ qua các file nằm trong `.gitignore`.
+- 📁 **Tạo sơ đồ cây (ASCII Tree):** Sinh ra cây cấu trúc thư mục ở đầu file giúp AI dễ hình dung kiến trúc project.
+- 🌐 **Hỗ trợ đa ngôn ngữ:** Giao diện hỗ trợ cả Tiếng Việt và Tiếng Anh.
 
-## ✅ Requirements
+---
 
-Python 3.x
-
-## 🤝 Contributing
-
-Feel free to fork and contribute to enhance tech detection, support new stacks, or improve output formatting!
+## 📜 License
+MIT License.

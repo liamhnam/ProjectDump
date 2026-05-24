@@ -12,7 +12,7 @@ from tree_generator import generate_directory_tree
 from pathlib import Path
 
 
-def aggregate_code(project_path: str, text: Dict[str, str]) -> bool:
+def aggregate_code(project_path: str, text: Dict[str, str], exclude_dirs: Set[str], exclude_files: Set[str]) -> bool:
     """Main function to aggregate project source code"""
     if not os.path.isdir(project_path):
         print(text["not_found"].format(path=project_path))
@@ -30,7 +30,7 @@ def aggregate_code(project_path: str, text: Dict[str, str]) -> bool:
 
     target_extensions: Set[str] = get_extensions_by_tech(detected_techs)
     get_essential_files()
-    exclude_dirs, exclude_files = get_exclude_patterns()
+    # exclude_dirs, exclude_files = get_exclude_patterns()
 
     print(text["included_ext"] + ", ".join(sorted(target_extensions)))
 
