@@ -1,7 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
 [project]
-name = "projectdump"
-version = "0.1.0"
-description = "Add your description here"
+name = "codeappendix"
+dynamic = ["version"]
+description = "Turn a project's source code into a formatted Word (.docx) appendix for theses, reports and software registration."
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = []
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+keywords = ["docx", "word", "source code", "appendix", "thesis", "phu luc", "ma nguon"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "Natural Language :: Vietnamese",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Documentation",
+    "Topic :: Office/Business :: Office Suites",
+]
+dependencies = [
+    "python-docx>=1.1",
+    "pygments>=2.15",
+    "pathspec>=0.12",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+codeappendix = "codeappendix.cli:main"
+phuluc = "codeappendix.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/liamhnam/CodeAppendix"
+Issues = "https://github.com/liamhnam/CodeAppendix/issues"
+
+[tool.hatch.version]
+path = "src/codeappendix/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/codeappendix"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["docs/", ".github/", ".python-version"]

@@ -1,0 +1,121 @@
+"""User-facing text in Vietnamese and English."""
+
+from __future__ import annotations
+
+from typing import Dict
+
+TEXT: Dict[str, Dict[str, str]] = {
+    "vi": {
+        # Document
+        "intro": "Phụ lục này trình bày mã nguồn của dự án {project}, gồm {files} tệp với tổng cộng {lines} dòng mã.",
+        "intro_truncated": " Các tệp dài hơn {max} dòng chỉ trích phần đầu và phần cuối.",
+        "list_caption": "Danh sách tệp mã nguồn",
+        "tree_caption": "Cấu trúc thư mục",
+        "col_no": "STT",
+        "col_file": "Tệp",
+        "col_language": "Ngôn ngữ",
+        "col_lines": "Số dòng",
+        "col_page": "Trang",
+        "total": "Tổng cộng",
+        "file_info": "Ngôn ngữ: {language} · {lines} dòng",
+        "file_info_truncated": "Ngôn ngữ: {language} · {lines} dòng (trích {shown} dòng)",
+        "omitted": "… lược bỏ {count} dòng (dòng {start}–{end}) …",
+        # CLI
+        "scanning": "Đang quét {path}",
+        "config_used": "Dùng cấu hình: {path}",
+        "no_files": "Không tìm thấy tệp mã nguồn nào. Chạy `codeappendix list {path} --verbose` để xem lý do từng tệp bị bỏ qua.",
+        "writing": "Đang tạo tài liệu Word...",
+        "written": "Đã tạo: {path}",
+        "stats": "{files} tệp · {lines} dòng · khoảng {pages} trang",
+        "skipped_summary": "Bỏ qua: {details}",
+        "pdf_written": "Đã tạo PDF: {path} ({pages} trang)",
+        "pdf_written_nopages": "Đã tạo PDF: {path}",
+        "pdf_missing": "Không tìm thấy LibreOffice để xuất PDF. Cài LibreOffice, hoặc mở tệp .docx bằng Word rồi chọn File → Save As → PDF.",
+        "pdf_failed": "Xuất PDF thất bại: {error}",
+        "open_in_word": "Mở bằng Word và chọn \"Yes\" khi được hỏi cập nhật trường (fields) để điền cột số trang.",
+        "write_failed": "Không ghi được {path}: {error}. Tệp có đang mở trong Word không?",
+        "not_a_dir": "Không tìm thấy thư mục: {path}",
+        "init_exists": "{path} đã tồn tại. Dùng --force để ghi đè.",
+        "init_written": "Đã tạo {path}. Sửa tệp này rồi chạy lại `codeappendix`.",
+        "list_header": "Các tệp sẽ đưa vào phụ lục:",
+        "list_skipped": "Các tệp/thư mục bị bỏ qua:",
+        "list_hint": "Thêm --verbose để xem từng tệp bị bỏ qua.",
+        "reason_excluded": "khớp exclude",
+        "reason_not_only": "ngoài phạm vi only",
+        "reason_gitignore": ".gitignore",
+        "reason_dependency": "thư viện/build",
+        "reason_hidden": "thư mục ẩn",
+        "reason_boilerplate": "khung nền tảng tự sinh",
+        "reason_vendored": "thư viện bên thứ ba",
+        "reason_not_source": "không phải mã nguồn",
+        "reason_binary": "tệp nhị phân",
+        "reason_generated": "do công cụ sinh ra",
+        "reason_minified": "đã nén (minified)",
+        "reason_too_large": "quá lớn",
+        "reason_output": "tệp đầu ra",
+        "reason_unreadable": "không đọc được",
+        "reason_empty": "rỗng",
+        "lines_unit": "dòng",
+    },
+    "en": {
+        "intro": "This appendix contains the source code of {project}: {files} files, {lines} lines in total.",
+        "intro_truncated": " Files longer than {max} lines are shown as excerpts from the beginning and end.",
+        "list_caption": "Source files",
+        "tree_caption": "Directory structure",
+        "col_no": "No.",
+        "col_file": "File",
+        "col_language": "Language",
+        "col_lines": "Lines",
+        "col_page": "Page",
+        "total": "Total",
+        "file_info": "Language: {language} · {lines} lines",
+        "file_info_truncated": "Language: {language} · {lines} lines ({shown} shown)",
+        "omitted": "… {count} lines omitted (lines {start}–{end}) …",
+        "scanning": "Scanning {path}",
+        "config_used": "Using config: {path}",
+        "no_files": "No source files found. Run `codeappendix list {path} --verbose` to see why each file was skipped.",
+        "writing": "Building the Word document...",
+        "written": "Created: {path}",
+        "stats": "{files} files · {lines} lines · about {pages} pages",
+        "skipped_summary": "Skipped: {details}",
+        "pdf_written": "Created PDF: {path} ({pages} pages)",
+        "pdf_written_nopages": "Created PDF: {path}",
+        "pdf_missing": "LibreOffice was not found, so no PDF was made. Install LibreOffice, or open the .docx in Word and use File → Save As → PDF.",
+        "pdf_failed": "PDF export failed: {error}",
+        "open_in_word": "Open it in Word and answer \"Yes\" when asked to update fields; this fills in the page column.",
+        "write_failed": "Could not write {path}: {error}. Is the file open in Word?",
+        "not_a_dir": "Folder not found: {path}",
+        "init_exists": "{path} already exists. Use --force to overwrite it.",
+        "init_written": "Created {path}. Edit it, then run `codeappendix` again.",
+        "list_header": "Files that will go into the appendix:",
+        "list_skipped": "Skipped files/folders:",
+        "list_hint": "Add --verbose to list every skipped file.",
+        "reason_excluded": "matched exclude",
+        "reason_not_only": "outside only",
+        "reason_gitignore": ".gitignore",
+        "reason_dependency": "dependency/build",
+        "reason_hidden": "hidden folder",
+        "reason_boilerplate": "platform scaffolding",
+        "reason_vendored": "third-party library",
+        "reason_not_source": "not source code",
+        "reason_binary": "binary",
+        "reason_generated": "generated",
+        "reason_minified": "minified",
+        "reason_too_large": "too large",
+        "reason_output": "output file",
+        "reason_unreadable": "unreadable",
+        "reason_empty": "empty",
+        "lines_unit": "lines",
+    },
+}
+
+
+def t(lang: str, key: str, **kwargs) -> str:
+    text = TEXT.get(lang, TEXT["vi"])[key]
+    return text.format(**kwargs) if kwargs else text
+
+
+def fmt_int(lang: str, n: int) -> str:
+    """Group thousands the way each language writes them: 12.345 / 12,345."""
+    s = f"{n:,}"
+    return s.replace(",", ".") if lang == "vi" else s
